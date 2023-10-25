@@ -1,4 +1,4 @@
-# Tips for Improving Your Programming Assignment 3
+# Tips for Improving Neural Networks
 
 **Section 1: Initial Assessment and General Suggestions**
 
