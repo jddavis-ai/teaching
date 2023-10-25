@@ -1,4 +1,4 @@
-**Title: Tips for Improving Your Programming Assignment**
+## Tips for Improving Your Programming Assignment 3
 
 **Section 1: Initial Assessment and General Suggestions**
 
