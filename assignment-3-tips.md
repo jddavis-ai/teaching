@@ -36,6 +36,12 @@
    ```python
    tf.nn.l2_loss(model.W[i])
    ```
+   **Code Snippet for L2 Regularization with Cross-Validation**
+   ```
+   # Use cross-validation to find an appropriate regularization strength (lambda).
+   best_lambda = cross_validate_for_best_lambda(data, labels)
+   reg = tf.constant(best_lambda)
+   ```
 
 4. **Loss Function:**
    - Issue: Loss function combines softmax cross-entropy and L2 regularization loss.
