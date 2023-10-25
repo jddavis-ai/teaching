@@ -77,3 +77,85 @@
 The choice of architecture (CNN) is well-suited for image classification tasks because it can capture spatial features effectively. The Adam optimizer with a lower learning rate helps in achieving stable convergence. Data augmentation is used to generate more diverse training examples and improve model generalization.
 
 In summary, this code demonstrates best practices in training a deep learning model for image classification with data augmentation, suitable architecture, and optimizer settings. These choices aim to achieve better accuracy by addressing overfitting and underfitting issues commonly encountered in deep learning.
+
+## Achieving a Higher Accuracy Score
+
+Achieving a 90% accuracy in image classification is a challenging task that often requires more advanced techniques, data augmentation, and deeper models. Here are some improvements you can make to the code to aim for higher accuracy:
+
+1. **Data Augmentation**: Apply data augmentation techniques to artificially increase your training data. This helps the model generalize better. You can use `tf.keras.layers.experimental.preprocessing` layers in TensorFlow 2.x for this.
+
+2. **Deeper Model**: Increase the depth of your neural network. You can add more convolutional and fully connected layers.
+
+3. **Learning Rate Schedule**: Implement a learning rate schedule. This can help you converge faster and reach a better solution.
+
+4. **Use Pre-trained Models**: Transfer learning is a powerful technique. You can use pre-trained models like VGG16, ResNet, or Inception, and fine-tune them for your task.
+
+5. **Batch Normalization**: Add Batch Normalization layers to stabilize training and potentially improve accuracy.
+
+6. **Hyperparameter Tuning**: Perform a more systematic hyperparameter search. You can use tools like Keras Tuner to optimize the hyperparameters.
+
+7. **Early Stopping**: Change the early stopping patience and other parameters to find the best point to stop training.
+
+8. **Increase Epochs**: Train for more epochs if you have not reached overfitting. However, be cautious of overfitting.
+
+Here's an example of how you could incorporate some of these changes into your code:
+
+```python
+import tensorflow as tf
+from tensorflow.keras.layers.experimental import preprocessing
+from sklearn.model_selection import train_test_split
+
+# Load the CIFAR-100 dataset
+(x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar100.load_data(label_mode='coarse')
+
+# Preprocess the data
+x_train = x_train.astype('float32') / 255.0
+x_test = x_test.astype('float32') / 255.0
+
+# Split the data into training, validation, and test sets
+x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, test_size=0.2, random_state=42)
+
+# Implement data augmentation
+data_augmentation = tf.keras.Sequential([
+    preprocessing.RandomFlip('horizontal'),
+    preprocessing.RandomRotation(0.2),
+    preprocessing.RandomZoom(0.1),
+])
+
+# Create a deeper model
+model = tf.keras.Sequential([
+    data_augmentation,
+    tf.keras.layers.Conv2D(64, (3, 3), activation='relu', input_shape=(32, 32, 3)),
+    tf.keras.layers.MaxPooling2D(2, 2),
+    tf.keras.layers.Conv2D(128, (3, 3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2, 2),
+    tf.keras.layers.Conv2D(256, (3, 3), activation='relu'),
+    tf.keras.layers.Flatten(),
+    tf.keras.layers.Dense(512, activation='relu'),
+    tf.keras.layers.Dropout(0.5),
+    tf.keras.layers.Dense(20)
+])
+
+# Use learning rate schedule
+lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(
+    initial_learning_rate=0.01,
+    decay_steps=10000,
+    decay_rate=0.9)
+
+optimizer = tf.keras.optimizers.SGD(learning_rate=lr_schedule, momentum=0.9)
+
+model.compile(optimizer=optimizer,
+              loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+              metrics=['accuracy'])
+
+# Training and early stopping
+early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_accuracy', patience=20, restore_best_weights=True)
+history = model.fit(x_train, y_train, epochs=100, batch_size=256,
+                    validation_data=(x_val, y_val), callbacks=[early_stopping])
+
+# Evaluate the model on the test data
+test_loss, test_acc = model.evaluate(x_test, y_test)
+print(f'Test accuracy: {test_acc * 100:.2f}%')
+```
+
+This code includes data augmentation, uses a deeper model, implements a learning rate schedule, and uses early stopping. You may need to adjust the parameters and architecture further to reach a 90% accuracy. Remember that obtaining high accuracy often involves a lot of experimentation and fine-tuning.
