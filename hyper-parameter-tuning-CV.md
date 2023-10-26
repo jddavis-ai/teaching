@@ -47,7 +47,7 @@ def create_model(reg_strength, learning_rate):
     # ...
 ```
 
-Step 5: Hyperparameter Tuning with Cross-Validation
+## Step 5: Hyperparameter Tuning with Cross-Validation
 
 In this step, we will perform hyperparameter tuning by systematically exploring different combinations of learning rates and L2 regularization strengths. The primary goal is to find the optimal set of hyperparameters that results in the highest validation accuracy while avoiding overfitting. To achieve this, we'll use early stopping as a mechanism to halt training if the model starts to overfit the data.
 
