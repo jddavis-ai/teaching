@@ -39,13 +39,91 @@ x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, test_size=0.
 
 ## Step 4: Creating the Neural Network Model
 
-Let's define a function to create the neural network model. The model includes dropout for regularization and L2 regularization for weight decay.
+In this step, we will define a function `create_model` to build the neural network model. The architecture of the model includes dropout layers for regularization and L2 regularization to control overfitting. Let's name and explain each layer of the model:
 
 ```python
 def create_model(reg_strength, learning_rate):
-    # Model architecture
-    # ...
+    model = tf.keras.Sequential()
 ```
+
+- We start by creating a sequential model, which allows us to build the neural network by stacking layers one after the other.
+
+### Layer 1: Input Layer
+
+```python
+    model.add(tf.keras.layers.Flatten(input_shape=(32, 32, 3)))
+```
+
+- The input layer is a flatten layer that reshapes the input data into a 1D vector. It takes images of size 32x32 pixels with 3 color channels (RGB).
+
+### Layer 2: Fully Connected Layer (Dense Layer)
+
+```python
+    model.add(tf.keras.layers.Dense(512, activation='relu', kernel_initializer='he_normal',
+                              kernel_regularizer=tf.keras.regularizers.l2(reg_strength)))
+```
+
+- This is a fully connected dense layer with 512 units. 
+- The activation function used is Rectified Linear Unit (ReLU), which introduces non-linearity to the model.
+- `kernel_initializer='he_normal'` initializes the weights of the layer using the He normal initialization method, which helps with training deep networks.
+- `kernel_regularizer=tf.keras.regularizers.l2(reg_strength)` applies L2 regularization with a strength defined by the `reg_strength` hyperparameter. L2 regularization helps prevent overfitting by adding a penalty term to the loss function based on the magnitude of weights.
+
+### Layer 3: Dropout Layer
+
+```python
+    model.add(tf.keras.layers.Dropout(0.3))
+```
+
+- The dropout layer introduces dropout regularization with a dropout rate of 0.3. Dropout randomly sets a fraction of input units to 0 during training, which helps prevent overfitting by reducing co-dependency between neurons.
+
+### Layer 4: Fully Connected Layer
+
+```python
+    model.add(tf.keras.layers.Dense(256, activation='relu', kernel_initializer='he_normal',
+                              kernel_regularizer=tf.keras.regularizers.l2(reg_strength)))
+```
+
+- Another fully connected dense layer with 256 units and ReLU activation.
+- It shares the same properties as the previous dense layer, including He normal weight initialization and L2 regularization.
+
+### Layer 5: Fully Connected Layer
+
+```python
+    model.add(tf.keras.layers.Dense(128, activation='relu', kernel_initializer='he_normal',
+                              kernel_regularizer=tf.keras.regularizers.l2(reg_strength)))
+```
+
+- A third fully connected dense layer with 128 units and ReLU activation.
+- Similar to the previous layers, it uses He normal initialization and L2 regularization.
+
+### Layer 6: Output Layer
+
+```python
+    model.add(tf.keras.layers.Dense(20))
+```
+
+- The final layer is the output layer with 20 units, corresponding to the 20 superclasses in the CIFAR-100 dataset. 
+- This layer doesn't use an activation function because it's a part of a classification problem, and the raw scores (logits) are used for calculating the loss.
+
+### Compiling the Model
+
+```python
+    optimizer = tf.keras.optimizers.SGD(learning_rate=learning_rate, momentum=0.9)
+    
+    model.compile(optimizer=optimizer,
+                  loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+                  metrics=['accuracy'])
+    
+    return model
+```
+
+- We configure the model for training by specifying the optimizer, loss function, and evaluation metrics.
+- The optimizer is Stochastic Gradient Descent (SGD) with a learning rate defined by the `learning_rate` hyperparameter and a momentum of 0.9.
+- The loss function is sparse categorical cross-entropy, which is suitable for multi-class classification tasks.
+- We also track the accuracy as an evaluation metric.
+- The function returns the compiled model.
+
+This neural network architecture, with dropout and L2 regularization, is designed to handle the CIFAR-100 classification task, and it aims to balance model complexity and overfitting while achieving good classification performance.
 
 ## Step 5: Hyperparameter Tuning with Cross-Validation
 
