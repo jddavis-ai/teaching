@@ -12,6 +12,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+import seaborn as sns
+import matplotlib.pyplot as plt
+
 # Define a simple neural network
 class SimpleModel(nn.Module):
     def __init__(self):
@@ -40,7 +43,7 @@ def lrp(model, input_data):
     output = model(input_data)
 
     # Step 2: Initialize relevance
-    relevance = output  # In this simplified example, we initialize relevance as the output
+    relevance = torch.ones_like(output)  # Initialize relevance to 1
 
     # Step 3: Backward Pass for LRP
     output.backward(relevance)  # Backpropagate the relevance
@@ -53,9 +56,19 @@ def lrp(model, input_data):
 # Calculate LRP for the input data
 lrp_values = lrp(model, input_data)
 
-# Visualize the LRP values
-print("LRP Values:")
-print(lrp_values)
+# Reshape LRP values if needed
+lrp_values = lrp_values.reshape(1, -1)  # Reshape to (1, input_features)
+
+# Create a heatmap
+sns.set(style="whitegrid")
+plt.figure(figsize=(10, 6))
+ax = sns.heatmap(lrp_values, cmap="coolwarm", annot=True, fmt=".2f", cbar=False)
+
+# Customize the heatmap
+ax.set_title("LRP Heatmap")
+ax.set_xlabel("Input Features")
+ax.set_ylabel("Relevance Scores")
+plt.show()
 
 ```
 
