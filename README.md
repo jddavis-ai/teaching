@@ -11,7 +11,7 @@ Welcome to the Code Examples Repository! This repository contains a collection o
 1. [LRP for Explainable AI](https://github.com/jddavis-ai/teaching/blob/main/LRP_for_Explainable_AI_Tutorial.ipynb)
    - This code demonstrates the usage of Layer-wise Relevance Propagation (LRP) for explainable AI. It includes a simple neural network model and LRP visualization.
 
-2. [MLOps with MLflow]([mlops_mlflow.py)](https://github.com/jddavis-ai/teaching/blob/main/mlops-mlflow.md)
+2. [MLOps with MLflow](https://github.com/jddavis-ai/teaching/blob/main/mlops-mlflow.md)
    - Explore how to use MLflow for managing machine learning projects, including versioning, tracking, and deploying regression models.
 
 3. [Cross-Validation for Hyperparameter Tuning]([neural_network.py](https://github.com/jddavis-ai/teaching/blob/main/Cross-Validation-Hyperparameter-Tuning.md))
