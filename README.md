@@ -17,7 +17,7 @@ Welcome to the Code Examples Repository! This repository contains a collection o
 3. [Cross-Validation for Hyperparameter Tuning](https://github.com/jddavis-ai/teaching/blob/main/Cross-Validation-Hyperparameter-Tuning.md)
    - This code showcases the implementation of a simple neural network using PyTorch. It includes model architecture, data preprocessing, training, and evaluation.
 
-4. [Ray's Tune for Hyperparameter Tuning an LLM](r[ay_hyperparameter_tuning.py](https://github.com/jddavis-ai/teaching/blob/main/LLM-Hyperparameter-Tuning-Tutorial.md))
+4. [Ray's Tune for Hyperparameter Tuning an LLM](https://github.com/jddavis-ai/teaching/blob/main/LLM-Hyperparameter-Tuning-Tutorial.md)
    - Learn how to use Ray's Tune library for hyperparameter tuning in PyTorch. The example covers distributed hyperparameter optimization.
 
 ## How to Use
