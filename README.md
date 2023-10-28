@@ -8,16 +8,16 @@ Welcome to the Code Examples Repository! This repository contains a collection o
 
 ## Table of Contents
 
-1. [LRP for Explainable AI](lrp_explainable_ai.py)
+1. [LRP for Explainable AI](https://github.com/jddavis-ai/teaching/blob/main/LRP_for_Explainable_AI_Tutorial.ipynb)
    - This code demonstrates the usage of Layer-wise Relevance Propagation (LRP) for explainable AI. It includes a simple neural network model and LRP visualization.
 
-2. [MLOps with MLflow](mlops_mlflow.py)
+2. [MLOps with MLflow]([mlops_mlflow.py)](https://github.com/jddavis-ai/teaching/blob/main/mlops-mlflow.md)
    - Explore how to use MLflow for managing machine learning projects, including versioning, tracking, and deploying regression models.
 
-3. [Neural Network Implementation](neural_network.py)
+3. [Cross-Validation for Hyperparameter Tuning]([neural_network.py](https://github.com/jddavis-ai/teaching/blob/main/Cross-Validation-Hyperparameter-Tuning.md))
    - This code showcases the implementation of a simple neural network using PyTorch. It includes model architecture, data preprocessing, training, and evaluation.
 
-4. [Ray's Tune for Hyperparameter Tuning](ray_hyperparameter_tuning.py)
+4. [Ray's Tune for Hyperparameter Tuning an LLM](r[ay_hyperparameter_tuning.py](https://github.com/jddavis-ai/teaching/blob/main/LLM-Hyperparameter-Tuning-Tutorial.md))
    - Learn how to use Ray's Tune library for hyperparameter tuning in PyTorch. The example covers distributed hyperparameter optimization.
 
 ## How to Use
