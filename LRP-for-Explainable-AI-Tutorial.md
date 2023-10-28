@@ -33,12 +33,30 @@ input_data = torch.tensor([0.1, 0.2, 0.3, 0.4], requires_grad=True)
 # Forward pass
 output = model(input_data)
 
-# Calculate LRP for explainability
-# (Explanation of the LRP code and its relevance to the LRP process)
+# Function to calculate LRP for explainability
+def lrp(model, input_data):
+    # Step 1: Forward Pass
+    model.zero_grad()
+    output = model(input_data)
+
+    # Step 2: Initialize relevance
+    relevance = output  # In this simplified example, we initialize relevance as the output
+
+    # Step 3: Backward Pass for LRP
+    output.backward(relevance)  # Backpropagate the relevance
+
+    # Step 4: Extract relevance scores for input features
+    relevance_scores = input_data.grad
+
+    return relevance_scores
+
+# Calculate LRP for the input data
+lrp_values = lrp(model, input_data)
 
 # Visualize the LRP values
 print("LRP Values:")
 print(lrp_values)
+
 ```
 
 - **Step 1:** We define a simple neural network using PyTorch, which represents a fundamental concept in deep learning.
