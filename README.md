@@ -19,7 +19,10 @@ Welcome to the Code Examples Repository! This repository contains a collection o
 
 4. [Ray's Tune for Hyperparameter Tuning an LLM](https://github.com/jddavis-ai/teaching/blob/main/LLM-Hyperparameter-Tuning-Tutorial.md)
    - Learn how to use Ray's Tune library for hyperparameter tuning in PyTorch. The example covers distributed hyperparameter optimization.
-
+  
+5. [Fine-Tuning an RAG-LLM on Healthcare Data](https://github.com/jddavis-ai/teaching/blob/main/fine-tuning-llm-rag.md)
+   - Learn how to fine-tune a RAG-LLM on healthcare data to improve accuracy. Data not included but may be uploaded at a later date.
+  
 ## How to Use
 
 To access any of the code examples, simply click on the links provided above. Each code example is contained within its respective file.
